@@ -11,13 +11,13 @@ import registerServiceWorker from './registerServiceWorker';
 
 const target = document.getElementById('root');
 const html = (
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
-    </ConnectedRouter>
-  </Provider>
+	<Provider store={store}>
+		<ConnectedRouter history={history}>
+			<div>
+				<App />
+			</div>
+		</ConnectedRouter>
+	</Provider>
 );
 
 ReactDOM.render(html, target);

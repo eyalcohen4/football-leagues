@@ -1,0 +1,33 @@
+@import './card.scss';
+
+.league-preview-list {
+	display: grid;
+	grid-template-columns: repeat(3, 33%);
+	grid-gap: 10px;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+
+	@media (max-width: 420px) {
+		grid-template-columns: repeat(2, 50%);
+	}
+}
+
+.league-preview {
+	background: #fff;
+	width: 100%;
+	@extend .card;
+	@extend .card--radius;
+
+	&__title {
+		background: #454;
+		width: 100%;
+		@extend .card__title;
+	}
+
+	&__actions {
+	width: 100%;
+	
+		@extend .card__actions;
+	}
+}

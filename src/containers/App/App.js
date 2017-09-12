@@ -1,16 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchLeaguesAction } from 'redux/modules/leagues';
+
 import logo from './logo.svg';
 
-const App = () => (
-	<div className="App">
-		<div className="App-header">
-			<img src={logo} className="App-logo" alt="logo" />
-			<h2>Welcome to React</h2>
-		</div>
-		<p className="App-intro">
-			To get started, edit <code>src/App.js</code> and save to reload.
-		</p>
-	</div>
-);
+import Home from 'containers/Home/Home';
+import LeagueTable from 'containers/LeagueTable/LeagueTable';
 
-export default App;
+class App extends Component {
+	constructor(props) {
+		super(props);
+		this.props.fetchLeaguesAction()
+	}
+	
+	render() {
+		return (
+			<div>
+				<header>
+					<Link to="/">Home</Link>
+					{/* <Link to="/about-us">About</Link> */}
+				</header>
+
+				<main>
+					<Route exact path="/" component={Home}/>
+					<Route exact path="/table/:id" component={LeagueTable} />
+				</main>
+			</div>
+		);
+	}
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+	fetchLeaguesAction,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(App);

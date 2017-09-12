@@ -1,0 +1,28 @@
+.league-table { 
+
+	@media (max-width: 580px) {
+		.league-table {
+			&__head {
+				&__row {
+					&--desktop-only {
+						display: none;
+					}
+				}
+			}
+
+			&__body {
+				&__row {
+					
+					&__col { 
+						padding: 5px;
+						height: 35px;
+						
+						&--desktop-only {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
