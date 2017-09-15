@@ -40,6 +40,15 @@ class FootballAPI {
 
 		return null;
 	}
+
+	async getTeam(id) {
+		const request = await this.sendRequest('GET', `teams/${id}`);
+		
+		if (request.status === 200) {
+			return request.data;
+		}
+		return null;
+	}
 }
 
 export default new FootballAPI();

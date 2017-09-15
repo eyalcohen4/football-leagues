@@ -1,37 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux';
 
-const LeagueTableBody = (props) => {
-	return (
-		<tbody>
-			{ props.clubs && props.clubs.map((club) => {
-				return (
-					<tr key={club.position} className="league-table__body__row">
-						<td className="league-table__body__row__col"> { club.position } { club.teamName } </td>
-						<td className="league-table__body__row__col"> { club.playedGames } </td>
-						<td className="league-table__body__row__col league-table__body__row__col--desktop-only"> 
-							{ club.goals } 
-						</td>
-						<td className="league-table__body__row__col league-table__body__row__col--desktop-only"> 
-							{ club.goalsAgainst } 
-						</td>
-						<td className="league-table__body__row__col league-table__body__row__col--desktop-only"> 
-							{ club.goalDifference} 
-						</td>
-						<td className="league-table__body__row__col league-table__body__row__col--desktop-only"> 
-							{ club.wins } 
-						</td>
-						<td className="league-table__body__row__col league-table__body__row__col--desktop-only"> 
-							{ club.draws } 
-						</td>
-						<td className="league-table__body__row__col league-table__body__row__col--desktop-only"> 
-							{ club.losses } 
-						</td>
-						<td className="league-table__body__row__col"> { club.points } </td>
-					</tr>
-				)
-			})}
-		</tbody>
-	);
-};
+import  { setCurrentTeam } from 'redux/modules/teams';
 
-export default LeagueTableBody;
+import ClubRow from 'components/ClubRow/ClubRow';
+
+class LeagueTableBody extends Component {
+		constructor(props) {
+			super(props);
+		}
+		
+		render() {
+			return (
+				<tbody>
+					{ this.props.clubs && this.props.clubs.map((club) => {
+						const clubHref = club._links.team.href; 
+						const clubId = parseInt(clubHref.substring(clubHref.lastIndexOf('/') + 1, clubHref.length));
+
+						const handleClick = () => { 
+							this.props.goToTeam(clubId);							
+							return this.props.setCurrentTeam(clubId) 
+						};
+
+						return (
+							<ClubRow club={club} onClick={handleClick} key={clubId} />
+						)
+					})}
+				</tbody>
+			);
+	}
+}
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+	setCurrentTeam,
+	goToTeam: (id) => push(`/team/${id}`)
+}, dispatch)
+
+export default connect(null, mapDispatchToProps)(LeagueTableBody);

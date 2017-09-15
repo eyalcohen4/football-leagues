@@ -10,6 +10,7 @@ import logo from './logo.svg';
 
 import Home from 'containers/Home/Home';
 import LeagueTable from 'containers/LeagueTable/LeagueTable';
+import Team from 'containers/Team/Team';
 
 class App extends Component {
 	constructor(props) {
@@ -21,13 +22,13 @@ class App extends Component {
 		return (
 			<div>
 				<header>
-					<Link to="/">Home</Link>
-					{/* <Link to="/about-us">About</Link> */}
+					<Link to="/">All Leagues</Link>
 				</header>
 
 				<main>
 					<Route exact path="/" component={Home}/>
 					<Route exact path="/table/:id" component={LeagueTable} />
+					<Route exact path="/team/:id" component={Team} />
 				</main>
 			</div>
 		);
