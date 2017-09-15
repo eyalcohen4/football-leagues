@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux';
 import { fetchLeaguesAction } from 'redux/modules/leagues';
 
@@ -36,5 +37,5 @@ class App extends Component {
 const mapDispatchToProps = dispatch => bindActionCreators({
 	fetchLeaguesAction,
 }, dispatch);
-
-export default connect(null, mapDispatchToProps)(App);
+const app = connect(null, mapDispatchToProps)(App);
+export default withRouter(app);

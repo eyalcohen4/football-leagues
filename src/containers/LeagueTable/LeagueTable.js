@@ -11,7 +11,8 @@ import LeagueTableBody from './LeagueTableBody';
 const headers = {
 	names: ['Name', 'Games', 'GF', 'GA', 'GD', 'W', 'D', 'L', 'Points'],
 	mobile: [0, 1, 8],
-}
+};
+
 class LeagueTable extends Component {
 	constructor(props) {
 		super(props);
@@ -40,7 +41,7 @@ class LeagueTable extends Component {
 
 const mapStateToThis = state => ({
 	table: state.tables.table,
-})
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	fetchTableAction,
