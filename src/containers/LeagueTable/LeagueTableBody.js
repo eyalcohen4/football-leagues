@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 
 import  { setCurrentTeam } from 'redux/modules/teams';
 
+import football from 'lib/football/football';
 import ClubRow from 'components/ClubRow/ClubRow';
 
 class LeagueTableBody extends Component {
@@ -18,10 +19,10 @@ class LeagueTableBody extends Component {
 				<tbody>
 					{ this.props.clubs && this.props.clubs.map((club) => {
 						const clubHref = club._links.team.href; 
-						const clubId = parseInt(clubHref.substring(clubHref.lastIndexOf('/') + 1, clubHref.length));
+						const clubId = football.getTeamIDFromURL(clubHref);
 
 						const handleClick = () => { 
-							this.props.goToTeam(clubId);							
+							this.props.goToTeam(this.props.league, clubId);							
 							return this.props.setCurrentTeam(clubId) 
 						};
 
@@ -36,7 +37,7 @@ class LeagueTableBody extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
 	setCurrentTeam,
-	goToTeam: (id) => push(`/team/${id}`)
+	goToTeam: (table, club) => push(`/table/${table}/team/${club}`)
 }, dispatch)
 
 export default connect(null, mapDispatchToProps)(LeagueTableBody);

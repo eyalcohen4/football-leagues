@@ -27,8 +27,8 @@ class App extends Component {
 
 				<main>
 					<Route exact path="/" component={Home}/>
-					<Route exact path="/table/:id" component={LeagueTable} />
-					<Route exact path="/team/:id" component={Team} />
+					<Route exact path="/table/:league" component={LeagueTable} />
+					<Route exact path="/table/:league/team/:team" component={Team} />
 				</main>
 			</div>
 		);

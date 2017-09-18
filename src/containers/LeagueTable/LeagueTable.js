@@ -16,9 +16,12 @@ const headers = {
 class LeagueTable extends Component {
 	constructor(props) {
 		super(props);
-		this.props.setCurrentLeague(this.props.match.params.id);
-		this.props.fetchTableAction();
+		console.log(this.props);
+		this.id 		 = this.props.league || this.props.match.params.league;
 		this.headers = headers;
+
+		this.props.setCurrentLeague(this.id);
+		this.props.fetchTableAction();
 	}
 
 	render() {
@@ -32,7 +35,7 @@ class LeagueTable extends Component {
 					</header>
 					<table>
 							<LeagueTableHeader headers={this.headers} />
-							<LeagueTableBody clubs={this.props.table && this.props.table.standing} />
+							<LeagueTableBody league={this.id} clubs={this.props.table && this.props.table.standing} />
 					</table>
 			</div>
 		);

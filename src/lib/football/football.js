@@ -21,6 +21,10 @@ class FootballAPI {
 		});
 	}
 
+	getTeamIDFromURL(url) {
+		return parseInt(url.substring(url.lastIndexOf('/') + 1, url.length));
+	}
+
 	async getCompeitions() {
 		const request = await this.sendRequest('GET', 'competitions');
 

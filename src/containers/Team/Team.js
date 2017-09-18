@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setCurrentTeam, fetchTeamAction } from 'redux/modules/teams';
 
 import Fixtures from 'components/Fixtures/Fixtures';
+import LeagueTable from 'containers/LeagueTable/LeagueTable';
 
 class Team extends Component {
 	constructor(props) {
@@ -22,6 +23,7 @@ class Team extends Component {
 			<div>
 				{ team && team.name}
 				<Fixtures fixtures={fixtures} />
+				<LeagueTable league={this.props.match.params.league}></LeagueTable> 
 			</div>
 		);
 	}
