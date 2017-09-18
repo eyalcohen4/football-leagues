@@ -1,8 +1,10 @@
 .club-row {
 	padding: 5px;
 	height: 35px;
-		
-	&--desktop-only {
-		display: none;
+
+	@media (max-width: 580px) { 
+		&--desktop-only {
+			display: none;
+		}
 	}
 }

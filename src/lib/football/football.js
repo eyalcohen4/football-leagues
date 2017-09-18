@@ -42,12 +42,23 @@ class FootballAPI {
 	}
 
 	async getTeam(id) {
-		const request = await this.sendRequest('GET', `teams/${id}`);
-		
-		if (request.status === 200) {
-			return request.data;
+		return Promise.all([
+			this.sendRequest('GET', `teams/${id}`),
+			this.sendRequest('GET', `teams/${id}/fixtures`),
+			this.sendRequest('GET', `teams/${id}/players`)
+		]).then(
+			responses => this.processTeamResponse(responses), 
+			error => error
+		);
+	}
+
+	processTeamResponse(team) {
+		const data = team.map(team => team.data);
+		return {
+			...data[0],
+			fixtures: data[1],
+			players: data[2],
 		}
-		return null;
 	}
 }
 

@@ -10,16 +10,20 @@ const initialState = {
 	id: null,
 };
 
-const fetchCurrentTeam = (dispatch, getState) => {
-	dispatch({ type: FETCH_TEAM_START });
-	const team = getState().teams.id;
+const fetchCurrentTeam = (id) => {
+	return (dispatch, getState) => { 
+		dispatch({ type: FETCH_TEAM_START });
 
-	football.getTeam(team).then(
-		team => dispatch({ type: FETCH_TEAM_COMPLETE, payload: team }),
-		error => dispatch({ type: FETCH_TEAM_FAILED, payload: error }),
-	);
+		football.getTeam(id).then(
+			team => dispatch({ type: FETCH_TEAM_COMPLETE, payload: team }),
+			error => dispatch({ type: FETCH_TEAM_FAILED, payload: error }),
+		);
+	}
 };
 
+const fetchFixtures = (url) => {
+
+}
 
 export const setCurrentTeam = team => {
 	return dispatch => dispatch({ 
@@ -28,7 +32,7 @@ export const setCurrentTeam = team => {
 	});
 }
 
-export const fetchTeamAction = () => fetchCurrentTeam;
+export const fetchTeamAction = id => dispatch => dispatch(fetchCurrentTeam(id));
 
 export default (state = initialState, action) => {
 	switch (action.type) {
